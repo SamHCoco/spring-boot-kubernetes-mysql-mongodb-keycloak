@@ -40,7 +40,7 @@ public class MovieController {
     public ResponseEntity<Object> saveMovie(@RequestBody Movie movie) {
         val created = movieService.save(movie);
         if (nonNull(created)) {
-            return new ResponseEntity<>(created, OK);
+            return new ResponseEntity<>(created, CREATED);
         }
         return new ResponseEntity<>("Movie already exists.", BAD_REQUEST);
     }
