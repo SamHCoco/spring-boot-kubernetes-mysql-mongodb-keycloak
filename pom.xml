@@ -17,7 +17,8 @@
 	<artifactId>spring-boot-kubernetes-mysql-mongodb-keycloak</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-kubernetes-mysql-mongodb-keycloak</name>
-	<description>Skeletal project that provides a template for a Spring Boot application that integrates Kubernetes, SQL and Non-SQL databases (MySQL and MongoDB) and authentication and authorisation features backed by Keycloak.</description>
+	<description>Skeletal project that provides a template for a Spring Boot application that integrates Kubernetes,
+		SQL and Non-SQL databases (MySQL and MongoDB) and authentication and authorisation features backed by Keycloak.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
