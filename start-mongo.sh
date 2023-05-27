@@ -15,4 +15,4 @@ docker run -d \
         -e ME_CONFIG_MONGODB_ADMINPASSWORD=${password} \
         --link mongo-db:mongo \
         --name mongo-express \
-        mongo-express:0.45.0
+        mongo-express:0.54
