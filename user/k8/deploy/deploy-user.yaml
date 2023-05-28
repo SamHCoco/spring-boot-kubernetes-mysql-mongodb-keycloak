@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-k8-user
+  namespace: spring-k8
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-k8-user
+  template:
+    metadata:
+      labels:
+        app: spring-k8-user
+    spec:
+      containers:
+      - name: spring-k8-user
+        image: spring-boot-k8-user-service:1.0.0
+        ports:
+        - containerPort: 9001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-k8-user-service
+spec:
+  type: ClusterIP
+  selector:
+    app: spring-k8-user
+  ports:
+    - protocol: TCP
+      port: 9001
+      targetPort: 9001
