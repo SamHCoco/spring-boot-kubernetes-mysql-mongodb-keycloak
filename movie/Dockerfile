@@ -1,6 +1,8 @@
 FROM openjdk:11
 
-WORKDIR /movie-service/
+RUN mkdir -p /movie-service
+
+WORKDIR /movie-service
 
 COPY target/*.jar movie-service.jar
 
