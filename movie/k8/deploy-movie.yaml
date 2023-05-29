@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-service-deployment
+  namespace: spring-k8
+  labels:
+    app: movie-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movie-service
+  template:
+    metadata:
+      labels:
+        app: movie-service
+    spec:
+      containers:
+        - name: movie-service
+          image: spring-boot-k8-movie-service:1.0.0
+          ports:
+            - containerPort: 9000
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: mysql-root-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: mysql-root-password
+            - name: MYSQL_DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: mysql-db-url
+            - name: MYSQL_DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: mysql-db-port
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: mongodb-root-username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: mongodb-root-password
+            - name: MONGO_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: mongo-db-name
+            - name: MONGO_DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: mongo-db-host
+            - name: MONGO_DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: mongo-db-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-service
+  labels:
+    app: movie-service
+spec:
+  type: ClusterIP
+  selector:
+    app: movie-service
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000

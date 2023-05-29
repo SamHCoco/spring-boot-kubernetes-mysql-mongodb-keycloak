@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: spring-k8
+data:
+  mysql-db-url: mysql-headless-service
+  mysql-db-port: "3307"
